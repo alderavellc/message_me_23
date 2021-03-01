@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_01_033103) do
+ActiveRecord::Schema.define(version: 2021_03_01_181714) do
 
   create_table "messages", force: :cascade do |t|
-    t.string "body"
+    t.text "body"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
