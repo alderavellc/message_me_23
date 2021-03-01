@@ -17,16 +17,11 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('turbolinks:load', function () {
+$(document).on('turbolinks:load', function() {
   $('.ui.dropdown').dropdown();
-  $('.message .close')
-  .on('click', function() {
-    $(this)
-      .closest('.message')
-      .transition('fade')
-    ;
-  })
-;
+  $('.message .close').on('click', function() {
+    $(this).closest('.message').transition('fade');
+  });
 })
 
 
