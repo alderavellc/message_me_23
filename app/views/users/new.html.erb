@@ -1,0 +1,26 @@
+<h3 class="ui center aligned medium icon header">
+  <i class="green comment icon"></i>
+  MessageMe
+</h3>
+
+<div class="ui container">
+  <div class="ui one column centered grid">
+    <div class="eight wide column">
+      <div class="ui fluid raised card">
+        <div class="content">
+          <%= form_for(@user, :html => { class: "ui form", role: "form" }) do |f| %>
+            <div class="field">
+              <%= f.label :email, "Email" %>
+              <%= f.text_field :email, placeholder: "Email" %>
+            </div>
+            <div class="field">
+              <%= f.label :password, "Password" %>
+              <%= f.password_field :password, placeholder: "Password" %>  </div>
+            </div>
+            <%= f.button "Sign up", class: "ui item green button" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
