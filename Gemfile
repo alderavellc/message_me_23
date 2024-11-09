@@ -13,7 +13,6 @@ gem 'minitest'
 
 # Frontend and asset management
 gem 'sass-rails', '>= 6'
-gem 'webpacker', '5.4.4'
 gem 'turbolinks', '~> 5'
 
 # JSON APIs and serialization
