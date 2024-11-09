@@ -17,13 +17,17 @@ Rails.application.configure do
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
-    config.cache_store = :memory_store
+    # Use Redis for caching
+    config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0' }
+
+    # Set the Cache-Control header for static files (optional)
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
 
+    # No caching when the caching-dev.txt file is not present
     config.cache_store = :null_store
   end
 
