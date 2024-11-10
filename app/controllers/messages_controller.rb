@@ -1,21 +1,20 @@
 class MessagesController < ApplicationController
   before_action :require_user
 
-  def create
-    message = current_user.messages.build(message_params)
-    if message.save
-      ActionCable.server.broadcast "chatroom_channel", mod_message: message_render(message)
-    end
+def create
+  message = current_user.messages.build(message_params)
+  if message.save
+    rendered_message = message_render(message)
+    ActionCable.server.broadcast "chatroom_channel", mod_message: rendered_message
+  else
+    # Handle failure
+    render json: { error: 'Message failed to save' }, status: :unprocessable_entity
   end
+end
 
   private
 
-    def message_params
-      params.require(:message).permit(:body)
-    end
-
-    def message_render(message)
-      render(partial: 'message', locals: {message: message })
-    end
-
+  def message_params
+    params.require(:message).permit(:body)
+  end
 end
