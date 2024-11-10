@@ -4,7 +4,12 @@ class MessagesController < ApplicationController
   def create
     message = current_user.messages.build(message_params)
     if message.save
-      ActionCable.server.broadcast "chatroom_channel", mod_message: message_render(message)
+      # Use render_to_string to render the message partial to a string
+      mod_message = render_to_string(partial: 'message', locals: { message: message })
+      # Broadcast the rendered message to the chatroom_channel
+      ActionCable.server.broadcast "chatroom_channel", mod_message: mod_message
+    else
+      render json: { error: 'Unable to save message' }, status: :unprocessable_entity
     end
   end
 
@@ -13,9 +18,4 @@ class MessagesController < ApplicationController
     def message_params
       params.require(:message).permit(:body)
     end
-
-    def message_render(message)
-      render(partial: 'message', locals: {message: message })
-    end
-
 end
