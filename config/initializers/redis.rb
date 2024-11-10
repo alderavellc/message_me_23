@@ -1,7 +1,9 @@
 require 'redis'
 
 REDIS = Redis.new(
-  url: ENV['REDIS_TLS_URL'] || ENV['REDIS_URL']
+  url: ENV['REDIS_TLS_URL'] || ENV['REDIS_URL'],
+  ssl: true,
+  ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE } # Disables SSL verification
 )
 
 # Optional: Log Redis status on startup
